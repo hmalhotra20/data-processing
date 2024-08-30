@@ -1,0 +1,36 @@
+version: '3.2'
+services:
+  producer:
+    build: .
+    hostname: producer
+    environment:
+      - profile=dev
+    networks:
+      - net1
+    volumes:
+      - "/Users/hemantm/work/bigdata/demo:/app"
+    entrypoint:
+      - sh
+      - -c
+      - "java -Djava.security.egd=file:/dev/./urandom -jar /app/target/demo-1.0.jar"
+    networks:
+      - net1
+
+  db:
+    image: mariadb
+    hostname: mariadb
+    volumes:
+      - "/var/lib/mysql"
+      - "./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql"
+    ports:
+      - '3306:3306'
+      - '9000:9000'
+    environment:
+      - MYSQL_DATABASE=simple_benchmark
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - net1
+
+networks:
+  net1:
+    driver: bridge

@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: "dev"
+  main:
+    banner-mode: "off"
+    
+logging:
+  level:
+    org.springframework: ERROR
+
+email: hemant.malhotra@rsystems.com
+incrementTimeEveryTick: 120
+allowedHitsPerTick: 10
+tickTime: 5000
+writeToQueueOrFile: true
+kafkaServersList: localhost:9092
+
+withInitialDateOrCurrent: true
+initialDate: 2018-01-14
+initialDateFormat: dd-MM-yyyy
+filePath: /tmp/data1.txt
